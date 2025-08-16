@@ -48,6 +48,12 @@
 #endif
 #endif /* _MINGW32__ || (_MSC_VER && (_MSC_VER <= 1900)) */
 
+/* Enable  MBEDTLS_ENTROPY_C in not client-only builds without an
+ * external entropy source. */
+#if defined(MBEDTLS_PSA_CRYPTO_C) && !defined(MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG)
+#define MBEDTLS_ENTROPY_C
+#endif
+
 /* If MBEDTLS_PSA_CRYPTO_C is defined, make sure MBEDTLS_PSA_CRYPTO_CLIENT
  * is defined as well to include all PSA code.
  */
